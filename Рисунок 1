@@ -1,0 +1,105 @@
+import pygame 
+import random 
+pygame.init() 
+sc=pygame.display.set_mode((500, 650)) 
+
+from pygame.draw import *
+
+clock=pygame.time.Clock() 
+FPS=60 
+
+Zelen=(34,139,34) 
+ZemlaRusskaya=(110,80,60) 
+SvetBojyj=(218,165,32) 
+Telo=(80,60,50) 
+Igly=(50,30,30) 
+LightBrown=(204,153,51) 
+White=(255,255,255) 
+Red=(255,51,0) 
+Grey=(204,204,204)
+    
+#фон
+
+def fon(cvet, nachalo_x, nachalo_y, lenth, width ):
+    rect(sc, cvet, (nachalo_x, nachalo_y, lenth, width))
+
+fon(Zelen, 0, 0, 500, 400)
+fon(ZemlaRusskaya, 0, 400, 500, 250)  
+fon(SvetBojyj, 0, 0, 30, 430) 
+fon(SvetBojyj, 50, 0, 100, 620) 
+fon(SvetBojyj, 350, 0, 30, 430) 
+fon(SvetBojyj, 450, 0, 40, 500) 
+
+
+#ёжик
+
+#тело ежика
+def ejik(cvet, x0, y0, length, width):
+    ellipse(sc, cvet, (x0, y0, length, width))
+    
+#обводка белым
+def obvodka(cvet, x0, y0, length, width, tolschina):
+    ellipse(sc, cvet, (x0, y0, length, width), tolschina)
+
+ejik(Telo, 220, 500, 180, 70) #туловище
+obvodka(Grey, 220, 500, 180, 70, 1)
+ejik(Telo, 370, 510, 60, 30) #голова
+obvodka(Grey, 370, 510, 60, 30, 1)
+ejik(Telo, 390, 540, 20, 10) #прав. верхн.
+obvodka(Grey, 390, 540, 20, 10, 1)
+ejik(Telo, 370, 550, 30, 15) #прав. нижн.
+obvodka(Grey, 370, 550, 30, 15, 1)
+ejik(Telo, 210, 540, 30, 10) #лев. верхн.
+obvodka(Grey, 210, 540, 30, 10, 1)
+ejik(Telo, 230, 550, 30, 15) #лев. нижн.
+obvodka(Grey, 230, 550, 30, 15, 1)
+
+ejik(Igly, 400, 520, 7, 7)
+ejik(Igly, 410, 515, 7, 7)
+
+
+#иглы ежа (1 часть)
+
+def igly(x, y):
+    polygon(sc, Igly, ((x,y), (x+15, y), (x+5, y-50)))
+    
+for i in range(40):
+    x=random.randint(225, 375)
+    y=random.randint(520, 560)
+    igly(x,y)
+    
+
+#о да, еда
+
+def fruit(cvet, x0, y0, radius):
+    circle(sc, cvet, (x0, y0), radius)
+    
+fruit(LightBrown, 260, 490, 20)
+fruit(LightBrown, 240, 495, 20)
+fruit(Red, 350, 490, 20)
+
+def mushroom(x0, y0, length, width):
+    ellipse(sc, White, (x0, y0, length, width))
+    ellipse(sc, Red, (x0-20, y0-5, width+5, length))
+    ellipse(sc, White, (x0, y0, width/5, length/5))
+    ellipse(sc, White, (x0+15, y0+5, width/5, length/5))
+    ellipse(sc, White, (x0-10, y0+5, width/10, length/10))
+    ellipse(sc, White, (x0+25, y0, width/10, length/10))
+    
+mushroom(300, 460, 20, 60)
+
+    
+#иглы ежа (2 часть)
+
+for i in range(20):
+    x=random.randint(225, 375)
+    y=random.randint(520, 560)
+    igly(x,y)
+
+
+
+pygame.display.update() 
+while True: 
+    for event in pygame.event.get(): 
+        if event.type == pygame.QUIT: 
+            exit()
