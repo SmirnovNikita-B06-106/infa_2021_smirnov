@@ -1,0 +1,118 @@
+import pygame 
+import random 
+pygame.init() 
+sc=pygame.display.set_mode((500, 650)) 
+
+from pygame.draw import *
+
+clock=pygame.time.Clock() 
+FPS=60 
+
+Zelen=(34,139,34) 
+ZemlaRusskaya=(110,80,60) 
+SvetBojyj=(218,165,32) 
+Telo=(80,60,50) 
+Igly=(50,30,30) 
+LightBrown=(204,153,51) 
+White=(255,255,255) 
+Red=(255,51,0) 
+Grey=(204,204,204)
+   
+   
+def main(): 
+
+    
+#фон
+
+    def fon(cvet, nachalo_x, nachalo_y, lenth, width ):
+        rect(sc, cvet, (nachalo_x, nachalo_y, lenth, width))
+
+    fon(Zelen, 0, 0, 500, 400)
+    fon(ZemlaRusskaya, 0, 400, 500, 250)  
+    fon(SvetBojyj, 0, 0, 30, 430) 
+    fon(SvetBojyj, 50, 0, 100, 620) 
+    fon(SvetBojyj, 350, 0, 30, 430) 
+    fon(SvetBojyj, 450, 0, 40, 500) 
+
+
+#ёжик
+
+    def hedgehog(x0, y0, scale):   
+
+
+#тело ежика
+
+        def ejik(cvet, x0, y0, length, width):
+            ellipse(sc, cvet, (x0, y0, length, width))
+    
+#обводка белым
+
+        def obvodka(cvet, x0, y0, length, width, tolschina):
+            ellipse(sc, cvet, (x0, y0, length, width, tolschina)
+
+#ежик 
+
+        ejik(Toel, x0, y0, 180 / scale, 70 / scale)   #туловище
+        obvodka(Grey, x0, y0, 180 / scale, 70 / scale, 1)
+        ejik(Telo, x0 + 150 / scale, y0 + 10 / scale, 60 / scale, 30 / scale)   #голова
+        obvodka(Grey, x0 + 150 / scale, y0 + 10 / scale, 60 / scale, 30 / scale, 1)
+        ejik(Telo, x0 + 170 / scale, y0 + 40 / scale, 20 scale, 10 / scale)   #прав. верхн.
+        obvodka(Grey, x0 + 170 / scale, y0 + 40 / scale, 20 scale, 10 / scale, 1)
+        ejik(Telo, x0 + 150 / scale, y0 + 50 / scale, 30 / scale, 15 / scale) #прав. нижн.
+        obvodka(Grey, x0 + 150 / scale, y0 + 50 / scale, 30 / scale, 15 / scale, 1)
+        ejik(Telo, x0 - 10 /scale, y0 + 40 / scale, 30 / scale, 10 / scale) #лев. верхн.
+        obvodka(Grey, x0 - 10 /scale, y0 + 40 / scale, 30 / scale, 10 / scale, 1)
+        ejik(Telo, x0 + 10 / scale, y0 + 50 / scale, 30 / scale, 15 / scale) #лев. нижн.
+        obvodka(Grey, x0 + 10 / scale, y0 + 50 / scale, 30 / scale, 15 / scale, 1)
+        ejik(Igly, x0 + 180 / scale, y0 + 20 / scale, 7 / scale, 7 / scale)
+        ejik(Igly, x0 + 190 / scale, y0 + 15 / scale, 7 / scale, 7 / scale)
+
+
+#иглы ежа (1 часть)
+
+        def igly(x, y):
+            polygon(sc, Igly, ((x,y), (x + 15, y), (x + 5, y - 50)))
+    
+        for i in range(40):
+            x=random.randint(x0 + 5 / scale, x0 + 155 / scale)
+            y=random.randint(y0 + 20 / scale, y0 + 60 / scale)
+            igly(x,y)  
+
+#еда
+
+        def fruit(cvet, x0, y0, radius):
+            circle(sc, cvet, (x0, y0), radius)
+    
+        fruit(LightBrown, x0 + 40 / scale, y0 - 10 / scale, 20 / scale)
+        fruit(LightBrown, x0 + 20 / scale, x0 - 5 / scale, 20 / scale)
+        fruit(Red, x0 + 130 / scale, y0 - 10 / scale, 20 / scale)
+
+        def mushroom(xn, yn, length, width):
+            ellipse(sc, White, (xn, yn, length, width))
+            ellipse(sc, Red, (xn-20, yn-5, width+5, length))
+            ellipse(sc, White, (xn, yn, width/5, length/5))
+            ellipse(sc, White, (xn+15, yn+5, width/5, length/5))
+            ellipse(sc, White, (xn-10, yn+5, width/10, length/10))
+            ellipse(sc, White, (xn+25, yn, width/10, length/10))
+    
+        mushroom(x0 + 80 / scale, y0 - 40 / scale, 20 / scale, 60 / scale)
+
+  
+#иглы ежа (2 часть)
+
+        for i in range(20):
+            x=random.randint(x0 + 5 / scale, y0 + 155 / scale)
+            y=random.randint(y0 + 20 / scale, y0 + 60 / scale)
+            igly(x,y)
+
+
+    hedgehog(220, 500, 1)
+    
+def main()    
+
+
+pygame.display.update() 
+while True: 
+    for event in pygame.event.get(): 
+        if event.type == pygame.QUIT: 
+            exit()
