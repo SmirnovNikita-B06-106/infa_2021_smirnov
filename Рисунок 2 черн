@@ -52,7 +52,7 @@ def main():
 
 #ежик 
 
-        ejik(Toel, x0, y0, 180 / scale, 70 / scale)   #туловище
+        ejik(Telo, x0, y0, 180 / scale, 70 / scale)   #туловище
         obvodka(Grey, x0, y0, 180 / scale, 70 / scale, 1)
         ejik(Telo, x0 + 150 / scale, y0 + 10 / scale, 60 / scale, 30 / scale)   #голова
         obvodka(Grey, x0 + 150 / scale, y0 + 10 / scale, 60 / scale, 30 / scale, 1)
